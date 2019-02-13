@@ -1,0 +1,7 @@
+#lang racket
+(define (ins LL X LR)
+  (if (null? (cdr LL))
+      (cons (car LL) (cons X LR))
+      (cons (car LL) (ins (cdr LL) X LR))))
+(define (insert L X)
+  (cons (ins '() X L) (insertR L X 1)))

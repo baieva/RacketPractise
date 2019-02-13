@@ -1,0 +1,22 @@
+#lang racket
+#|Mingjia SHi 104467237|#
+(define (unify L1 L2)
+  (cond
+    ((null? L1) L2)
+    ((member (car L1) L2) (unify (cdr L1) L2))
+    (else (cons (car L1) (unify (cdr L1) L2)))))
+(define (makeList L)
+  (if (null? (cdr L))
+      (unify (car L) '())
+      (unify (car L) (makeList (cdr L)))))
+(define (reve X L)
+  (if (null? (cdr L))
+      (if (member X (cdr (car L))) (list (car (car L))) '())
+      (if (member X (cdr (car L))) (cons (car (car L)) (reve X (cdr L))) (reve X (cdr L)))))
+(define (inverse L eL)
+  (if (null? (cdr eL))
+      (list (cons (car eL) (reve (car eL) L)))
+      (cons (cons (car eL) (reve (car eL) L)) (inverse L (cdr eL)))))
+(define (graph L)
+  (inverse L (makeList L)))
+(graph '((a b c) (b c e) (c b a)))

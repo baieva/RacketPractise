@@ -1,0 +1,6 @@
+#lang racket
+(define (makeList L)
+  (if (null? (cdr L))
+      (unify (car L) '())
+(define (graph L)
+  (inverse L (makeList L)))
